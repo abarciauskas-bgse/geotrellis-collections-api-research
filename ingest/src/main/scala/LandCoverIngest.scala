@@ -14,7 +14,7 @@ import org.apache.hadoop.fs.Path
 object LandCoverIngest {
   val localGeoTiffPath =
     new java.io.File(new java.io.File(".").getCanonicalFile,
-      "land-cover-data/geotiff/nlcd_pa.tif").getAbsolutePath
+      "land-cover-data/geotiff/elevation-gabon.tif").getAbsolutePath
 
   val localCatalogPath =
     new java.io.File(new java.io.File(".").getCanonicalFile,
@@ -42,7 +42,7 @@ object LandCoverIngest {
             .mapValues { tile => tile.convert(ByteConstantNoDataCellType) },
           metadata.copy(cellType = ByteConstantNoDataCellType))
 
-      val paLandCoverLayerID = LayerId("nlcd-pennsylvania", 0)
+      val paLandCoverLayerID = LayerId("elevation-gabon", 0)
 
       FileLayerWriter(localCatalogPath)
         .write(paLandCoverLayerID, paLandCoverLayer, ZCurveKeyIndexMethod)

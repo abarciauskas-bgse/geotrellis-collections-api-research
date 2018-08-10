@@ -31,12 +31,12 @@ object LandCoverPaint {
 
   // Layer Name which will be used for reading the ingested data layer as well
   // as the directory for tiles to be written in.
-  val LayerName = "nlcd-pennsylvania"
+  val LayerName = "elevation-gabon"
 
   // Path to local GeoTIFF, used for reading the color ramp
   val localGeoTiffPath = new java.io.File(
     new java.io.File(".").getCanonicalFile,
-    "land-cover-data/geotiff/nlcd_pa.tif"
+    "land-cover-data/geotiff/elevation-gabon.tif"
   ).getAbsolutePath
 
   // Path to local ingested data, used for reading the cell values
@@ -55,7 +55,7 @@ object LandCoverPaint {
     // Initialize Spark
     val conf = new SparkConf()
       .setIfMissing("spark.master", "local[*]")
-      .setAppName("Paint PA Land Cover Tiles")
+      .setAppName("Paint Gabon Elevation Tiles")
       .set("spark.serializer", classOf[KryoSerializer].getName)
       .set("spark.kryo.registrator", classOf[KryoRegistrator].getName)
 
