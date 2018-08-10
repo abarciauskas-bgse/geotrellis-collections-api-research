@@ -37,9 +37,9 @@ server: app-server api-server
 setup: build paint
 
 download-tif:
-ifeq (,$(wildcard ./ingest/land-cover-data/geotiff/nlcd_pa.tif))
-	curl -o ./ingest/land-cover-data/geotiff/nlcd_pa.tif \
-	https://azavea-research-public-data.s3.amazonaws.com/geotrellis/samples/nlcd_pa.tif
+ifeq (,$(wildcard ./ingest/land-cover-data/geotiff/elevation-gabon.tif))
+	curl -o ./ingest/land-cover-data/geotiff/elevation-gabon.tif \
+	https://github.com/developmentseed/nasa-map/blob/master/scripts/point-to-raster/lvis.tif
 endif
 
 ingest-assembly:
@@ -48,8 +48,8 @@ ingest-assembly:
 compile-ingest:
 	bash -c "trap 'cd ..' EXIT; cd ingest; sbt compile"
 
-ingest: ingest-assembly download-tif
-ifeq (,$(wildcard ./ingest/land-cover-data/catalog/attributes/nlcd-pennsylvania__.__0__.__metadata.json))
+ingest: ingest-assembly #download-tif
+ifeq (,$(wildcard ./ingest/land-cover-data/catalog/attributes/elevation-gabon__.__0__.__metadata.json))
 	bash -c "trap 'cd ..' EXIT; cd ingest; spark-submit \
 		--name \"NLCDPA Ingest\" \
 		--master \"local[*]\" \
