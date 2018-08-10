@@ -17,11 +17,14 @@ trait Utils {
 
   def fetchLocalCroppedPANLCDLayer(
     shape: MultiPolygon
-  ): TileLayerCollection[SpatialKey] =
-    localFileReader
-      .query[SpatialKey, Tile, TileLayerMetadata[SpatialKey]](paNLCDLayerID)
-      .where(Intersects(shape))
-      .result
+  ): TileLayerCollection[SpatialKey] = {
+    println("paNLCDLayerID")
+    println(paNLCDLayerID)
+    val result = localFileReader.query[SpatialKey, Tile, TileLayerMetadata[SpatialKey]](paNLCDLayerID).result
+    println("Result: ")
+    println(result)
+    result
+  }
 
   def createAOIFromInput(polygon: String): MultiPolygon = parseGeometry(polygon)
 

@@ -63,6 +63,8 @@ object LandCoverPaint {
 
     try {
       // Read color map from original GeoTIFF
+      println("localGeoTiffPath")
+      println(localGeoTiffPath)
       val geotiff = SinglebandGeoTiff(localGeoTiffPath)
       val colorMap = geotiff.options.colorMap.get
 

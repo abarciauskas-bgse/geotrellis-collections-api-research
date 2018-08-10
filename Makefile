@@ -39,7 +39,7 @@ setup: build paint
 download-tif:
 ifeq (,$(wildcard ./ingest/land-cover-data/geotiff/elevation-gabon.tif))
 	curl -o ./ingest/land-cover-data/geotiff/elevation-gabon.tif \
-	https://github.com/developmentseed/nasa-map/blob/master/scripts/point-to-raster/lvis.tif
+	https://github.com/developmentseed/nasa-map/raw/master/scripts/point-to-raster/lvis.tif
 endif
 
 ingest-assembly:
@@ -48,7 +48,7 @@ ingest-assembly:
 compile-ingest:
 	bash -c "trap 'cd ..' EXIT; cd ingest; sbt compile"
 
-ingest: ingest-assembly #download-tif
+ingest: ingest-assembly download-tif
 ifeq (,$(wildcard ./ingest/land-cover-data/catalog/attributes/elevation-gabon__.__0__.__metadata.json))
 	bash -c "trap 'cd ..' EXIT; cd ingest; spark-submit \
 		--name \"NLCDPA Ingest\" \
@@ -59,9 +59,9 @@ ifeq (,$(wildcard ./ingest/land-cover-data/catalog/attributes/elevation-gabon__.
 endif
 
 paint: ingest
-ifeq (,$(wildcard ./ingest/land-cover-data/tiles/nlcd-pennsylvania/0/0/0.png))
+ifeq (,$(wildcard ./ingest/land-cover-data/tiles/elevation-gabon/0/0/0.png))
 	bash -c "trap 'cd ..' EXIT; cd ingest; spark-submit \
-		--name \"Paint PA Land Cover Tiles\" \
+		--name \"Paint Gabon Elevation Tiles\" \
 		--master \"local[*]\" \
 		--driver-memory 4G \
 		--class LandCoverPaint \
@@ -70,6 +70,6 @@ endif
 
 clean:
 	bash -c "trap 'cd ..' EXIT; cd ingest; \
-		rm -f land-cover-data/geotiff/nlcd_pa.tif; \
+		rm -f land-cover-data/geotiff/elevation-gabon.tif; \
 		rm -rf land-cover-data/catalog/*; \
 		rm -rf land-cover-data/tiles/*"
