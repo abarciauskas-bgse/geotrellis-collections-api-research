@@ -23,7 +23,7 @@ import {
     paNLCDtiles,
 } from '../constants';
 
-import pennsylvaniaBoundaries from '../pennsylvaniaBoundaries';
+import gabon from '../gabon';
 
 import DataCard from './DataCard';
 
@@ -96,7 +96,7 @@ export default class Map extends Component {
 
         const paBoundariesLayer = (
             <GeoJSON
-                data={pennsylvaniaBoundaries}
+                data={gabon}
                 style={{ fill: false, color: '#FF5733' }}
             />
         );

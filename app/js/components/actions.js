@@ -5,7 +5,7 @@ import {
     apiServerURL,
 } from '../constants';
 
-import pennsylvaniaBoundaries from '../pennsylvaniaBoundaries';
+import gabon from '../gabon';
 
 export const START_SUBMIT_AOI = 'START_SUBMIT_AOI';
 export const COMPLETE_SUBMIT_AOI = 'COMPLETE_SUBMIT_AOI';
@@ -73,9 +73,9 @@ export function submitAreaOfInterest(aoi) {
     cancelPriorRequest();
     return (dispatch, getState) => {
         dispatch(startSubmitAreaOfInterest(aoi));
-        const { geometry: paGeom } = pennsylvaniaBoundaries.features[0];
+        const { geometry: paGeom } = gabon.features[0];
         if (!turfContains(paGeom, aoi)) {
-            const errorMessage = 'Drawn shape must be within Pennsylvania';
+            const errorMessage = 'Drawn shape must be within Gabon';
             return dispatch(failSubmitAreaOfInterest(errorMessage));
         }
 

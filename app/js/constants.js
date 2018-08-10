@@ -35,4 +35,4 @@ export const paNLCDMap = {
     noData: 'Unknown',
 };
 
-export const paNLCDtiles = '/tiles/nlcd-pennsylvania/{z}/{x}/{y}.png';
+export const paNLCDtiles = '/tiles/elevation-gabon/{z}/{x}/{y}.png';
