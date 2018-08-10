@@ -13,7 +13,7 @@ trait Utils {
       new java.io.File(new java.io.File(".").getCanonicalFile,
         "../ingest/land-cover-data/catalog").getAbsolutePath
   val localFileReader = FileCollectionLayerReader(localCatalogPath)
-  val paNLCDLayerID = LayerId("nlcd-pennsylvania", 0)
+  val paNLCDLayerID = LayerId("elevation-gabon", 0)
 
   def fetchLocalCroppedPANLCDLayer(
     shape: MultiPolygon
